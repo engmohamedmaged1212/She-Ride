@@ -1,1 +1,15 @@
-spring.application.name=sheDrive
+spring:
+  application:
+    name: sheRide
+
+
+  datasource:
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+jwt:
+  secret: ${JWT_SECRET}
+  accessTokenExpiration: 7200
+  refreshTokenExpiration: 604800
