@@ -13,3 +13,8 @@ jwt:
   secret: ${JWT_SECRET}
   accessTokenExpiration: 7200
   refreshTokenExpiration: 604800
+
+app:
+  admin:
+    phone: ${ADMIN_PHONE}
+    password: ${ADMIN_PASSWORD}
