@@ -21,7 +21,7 @@ public class CustomerService {
             throw new FalseInputData("The user is not identified as a Customer");
         }
         if (existsCustomerById(user.getId())) {
-            throw new FalseInputData("Driver already exists");
+            throw new FalseInputData("Customer already exists");
         }
         Customer customer = new Customer();
         customer.setUser(user);

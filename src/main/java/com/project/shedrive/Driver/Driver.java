@@ -42,7 +42,7 @@ public class Driver {
     @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "id_verification_status", nullable = false)
-    private Status VerificationStatus;
+    private Status verificationStatus;
 
     @Column(name = "id_verified_at")
     private LocalDateTime idVerifiedAt;

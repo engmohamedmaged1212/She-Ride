@@ -1,6 +1,10 @@
 spring:
   application:
     name: sheRide
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      port: ${REDIS_PORT}
 
 
   datasource:
@@ -17,4 +21,6 @@ jwt:
 app:
   admin:
     phone: ${ADMIN_PHONE}
-    password: ${ADMIN_PASSWORD}
+    password: ${ADMIN_PASSWORD
+    otp:
+      expiration-minutes: 5}

@@ -1,6 +1,8 @@
 package com.project.shedrive.Admin;
 
 import com.project.shedrive.Admin.DTOs.AdminMapper;
+import com.project.shedrive.Exceptions.FalseInputData;
+import com.project.shedrive.Exceptions.UsernameAlreadyExistException;
 import com.project.shedrive.User.DTOs.CreateAdminRequest;
 import com.project.shedrive.User.User;
 import com.project.shedrive.User.UserService;
@@ -11,17 +13,13 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AdminService {
     private final AdminRepository adminRepository;
-    private final AdminMapper adminMapper;
-    private final UserService userService;
 
-    public User CreateAdmin(CreateAdminRequest CreateAdminRequest){
-        return userService.createAdmin(CreateAdminRequest);
-    }
     public void CreateAdmin(User user) {
+        if (adminRepository.findById(user.getId()).isPresent()) {
+            throw new UsernameAlreadyExistException("User already exists");
+        }
         Admin admin = new Admin();
         admin.setUser(user);
-        user.setIsActive(true);
         adminRepository.save(admin);
     }
-
 }

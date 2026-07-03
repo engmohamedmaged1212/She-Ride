@@ -50,7 +50,29 @@ public class GlobalExceptionHandler {
     ){
         var errors = new HashMap<String ,String>();
         return ResponseEntity
-                .status(HttpStatus.UNAUTHORIZED)
+                .status(HttpStatus.BAD_REQUEST)
+                .body(Map.of("error" , ex.getMessage() ));
+    }
+
+    //OtpExpirationException
+    @ExceptionHandler(OtpExpirationException.class)
+    public ResponseEntity<Map<String , String>> handleOtpExpirationException(
+            OtpExpirationException ex
+    ){
+        var errors = new HashMap<String ,String>();
+        return ResponseEntity
+                .status(HttpStatus.REQUEST_TIMEOUT)
+                .body(Map.of("error" , ex.getMessage() ));
+    }
+
+    //UserNotFoundException
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<Map<String , String>> handleUserNotFoundException(
+            UserNotFoundException ex
+    ){
+        var errors = new HashMap<String ,String>();
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
                 .body(Map.of("error" , ex.getMessage() ));
     }
 }
