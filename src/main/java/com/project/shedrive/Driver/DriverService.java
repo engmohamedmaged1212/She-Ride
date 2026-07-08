@@ -1,6 +1,7 @@
 package com.project.shedrive.Driver;
 
 import com.project.shedrive.Exceptions.FalseInputData;
+import com.project.shedrive.Exceptions.UserNotFoundException;
 import com.project.shedrive.User.Status;
 import com.project.shedrive.User.User;
 import lombok.RequiredArgsConstructor;
@@ -9,13 +10,18 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class DriverService {
+
     private final DriverRepository driverRepository;
+
     public Driver findDriverById(Long id) {
-        return driverRepository.findById(id).orElse(null);
+        return driverRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("Driver not found with id: " + id));
     }
+
     public boolean existsDriverById(Long id) {
         return driverRepository.existsById(id);
     }
+
     public void createNewDriver(User user) {
         if (user.getRole() != User.Role.DRIVER) {
             throw new FalseInputData("User is not a driver");
@@ -26,6 +32,8 @@ public class DriverService {
         Driver driver = new Driver();
         driver.setUser(user);
         driver.setVerificationStatus(Status.PENDING);
+        driver.setIsOnline(false);
+        driver.setTotalTrips(0);
         driverRepository.save(driver);
     }
 }
