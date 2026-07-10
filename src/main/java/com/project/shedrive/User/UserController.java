@@ -157,8 +157,9 @@ public class UserController {
      */
     @GetMapping("/me")
     public ResponseEntity<UserDto> getMyProfile(@AuthenticationPrincipal Long userId) {
-        User user = userService.findById(userId);
-        return ResponseEntity.ok(userMapper.toUserDto(user));
+        System.out.println("Controller reached");
+        System.out.println(userId);
+        return ResponseEntity.ok(userService.me(userId));
     }
 
     // Admin Only Endpoints
@@ -238,11 +239,7 @@ public class UserController {
         userService.unblockUser(id);
         return ResponseEntity.noContent().build();
     }
-
-    // =====================================================
     // Inner Request/Response DTOs
-    // =====================================================
-
 
     @lombok.Data
     public static class PhoneRequest {

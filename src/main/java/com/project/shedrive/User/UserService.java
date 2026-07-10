@@ -139,6 +139,10 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 
+    public UserDto me(Long userId) {
+        User user = findById(userId);
+        return userMapper.toUserDto(user);
+    }
 
     @Transactional
     public User createAdmin(CreateAdminRequest request) {

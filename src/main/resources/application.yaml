@@ -21,6 +21,7 @@ jwt:
 app:
   admin:
     phone: ${ADMIN_PHONE}
-    password: ${ADMIN_PASSWORD
-    otp:
-      expiration-minutes: 5}
+    password: ${ADMIN_PASSWORD}
+
+  otp:
+    expiration-minutes: 5

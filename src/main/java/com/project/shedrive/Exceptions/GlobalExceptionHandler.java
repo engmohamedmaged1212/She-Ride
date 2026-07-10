@@ -2,6 +2,7 @@ package com.project.shedrive.Exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -73,6 +74,28 @@ public class GlobalExceptionHandler {
         var errors = new HashMap<String ,String>();
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
+                .body(Map.of("error" , ex.getMessage() ));
+    }
+
+    //InvalidCredentialsException
+    @ExceptionHandler(InvalidCredentialsException.class)
+    public ResponseEntity<Map<String , String>> handleInvalidCredentialsException(
+            InvalidCredentialsException ex
+    ){
+        var errors = new HashMap<String ,String>();
+        return ResponseEntity
+                .status(HttpStatus.UNAUTHORIZED)
+                .body(Map.of("error" , ex.getMessage() ));
+    }
+
+    //BadCredentialsException
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<Map<String , String>> handleBadCredentialsException(
+            BadCredentialsException ex
+    ){
+        var errors = new HashMap<String ,String>();
+        return ResponseEntity
+                .status(HttpStatus.UNAUTHORIZED)
                 .body(Map.of("error" , ex.getMessage() ));
     }
 }
